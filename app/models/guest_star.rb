@@ -1,0 +1,2 @@
+class GuestStar < ApplicationRecord
+end

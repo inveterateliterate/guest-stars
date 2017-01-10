@@ -1,0 +1,32 @@
+<%= form_for(guest_star) do |f| %>
+  <% if guest_star.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(guest_star.errors.count, "error") %> prohibited this guest_star from being saved:</h2>
+
+      <ul>
+      <% guest_star.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.text_field :image %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
