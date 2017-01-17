@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Series name:</strong>
-  <%= @series.series_name %>
+  <strong>Series Title:</strong>
+  <%= @series.series_title %>
 </p>
 
 <p>
@@ -20,5 +18,7 @@
   <%= @series.rating %>
 </p>
 
-<%= link_to 'Edit', edit_series_path(@series) %> |
+<% link_to 'Edit |', edit_series_path(@series) %>
 <%= link_to 'Back', series_index_path %>
+
+<%= render partial: "shared/episodes", locals: {episodes: @episodes} %>

@@ -4,12 +4,21 @@ class SeriesController < ApplicationController
   # GET /series
   # GET /series.json
   def index
-    @series = Series.all
+    @series = Series.all.sort_by { |series| series.series_title }
   end
 
   # GET /series/1
   # GET /series/1.json
   def show
+    @num_of_seasons = MovieData.get_seasons(@series.series_title)
+    @episodes = @series.episodes.sorted
+  end
+
+  def episodes_by_season
+    @series = Series.find_by_series_title(params[:series_title]) || Series.find(params[:id])
+    @num_of_seasons = MovieData.get_seasons(@series.series_title)
+    @episodes = @series.episodes.season(params[:season_num]).sorted
+    render :show
   end
 
   # GET /series/new
@@ -64,7 +73,7 @@ class SeriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_series
-      @series = Series.find(params[:id])
+      @series = Series.find_by_series_title(params[:id]) || Series.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

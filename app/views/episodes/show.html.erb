@@ -1,0 +1,28 @@
+<p>
+  <strong>Series Title:</strong>
+  <%= @episode.series.series_name %>
+</p>
+
+
+<p>
+  <strong>Episode Title:</strong>
+  <%= @episode.name %>
+</p>
+
+<p>
+  <strong>Season Number:</strong>
+  <%= @episode.season_number %>
+</p>
+
+<p>
+  <strong>Episode Number:</strong>
+  <%= @episode.episode_number %>
+</p>
+
+<p>
+  <strong>Episode Summary:</strong>
+  <%= @episode.episode_summary %>
+</p>
+
+<%= link_to 'Edit', edit_episode_path(@episode) %> |
+<%= link_to 'Back', episodes_path %>

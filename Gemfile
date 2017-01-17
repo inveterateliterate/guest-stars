@@ -23,6 +23,16 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip', '~> 4.3.6'
+gem 'httparty'
+gem 'devise'
+gem 'themoviedb'
+gem 'figaro'
+gem 'pry'
+gem 'pry-nav'
+gem 'pry-rails'
+gem 'pry-stack_explorer'
+gem 'pry-theme'
+gem 'kaminari'
 
 
 # Use Capistrano for deployment

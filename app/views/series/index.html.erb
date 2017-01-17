@@ -1,28 +1,26 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Series</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Series name</th>
+      <th>Series Title</th>
       <th>Genre</th>
       <th>Summary</th>
       <th>Rating</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @series.each do |series| %>
       <tr>
-        <td><%= series.series_name %></td>
+        <td><%= link_to series.series_title, series_path(series) %></td>
         <td><%= series.genre %></td>
-        <td><%= series.summary %></td>
+        <td><%= raw series.summary.truncate(200) %></td>
         <td><%= series.rating %></td>
-        <td><%= link_to 'Show', series %></td>
-        <td><%= link_to 'Edit', edit_series_path(series) %></td>
-        <td><%= link_to 'Destroy', series, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% link_to 'Show', series %></td>
+        <td><% link_to 'Edit', edit_series_path(series) %></td>
+        <td><% link_to 'Destroy', series, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Series', new_series_path %>
+<% link_to 'New Series', new_series_path %>
