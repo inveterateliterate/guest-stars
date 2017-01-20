@@ -10,10 +10,8 @@ module MovieData
     HTTParty.get(BASE_URL + "search/#{search_type}?query=#{URI.encode(query_term)}&" + API_KEY)["results"][0]
   end
 
-  def self.get_imdb_id(search_type, query_term)
-    results = search_for(search_type, query_term)
-    results["id"]
-  end
+  def self.get_id(search_type, query_term)
+    search_for(search_type, series_title)["id"]
 
   #Genres
   def self.get_genre_list
@@ -32,20 +30,24 @@ module MovieData
 
   #Episodes
   def self.get_seasons(series_title)
-    series_imdb_id = get_imdb_id("tv", series_title)
+    series_imdb_id = search_for("tv", series_title)["id"]
     HTTParty.get(BASE_URL + "tv/#{series_imdb_id}?" + API_KEY)["number_of_seasons"]
   end
 
-  def self.get_episodes(series_name, season_num)
-    series_imdb_id = get_imdb_id("tv", series_name)
+  def self.get_episodes(series_title, season_num)
+    series_imdb_id = search_for("tv", series_title)["id"]
     HTTParty.get(BASE_URL + "tv/#{series_imdb_id}/season/#{season_num}?" + API_KEY)["episodes"]
   end
 
   #Actors
-  def self.get_guest_stars(query_term)
-    star = search_for("person", query_term)
-    #update
-    star["id"]
+  # def self.get_guest_star(query_term)
+  #   star_imdb_id = search_for("person", query_term)["id"]
+  #   HTTParty.get(BASE_URL + "person/#{star_imdb_id}?" + API_KEY)
+  # end
+
+  def self.get_appearances(query_term)
+    star_imdb_id = search_for("person", query_term)["id"]
+    HTTParty.get(BASE_URL + "person/#{star_imdb_id}/tv_credits?" + API_KEY)
   end
 end
 
