@@ -1,0 +1,46 @@
+<h3>Appearances</h3>
+
+<ul class="nav nav-pills">
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+    Series<span class="caret"></span>
+    </a>
+      <ul class="dropdown-menu">
+
+      </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Actor Name</th>
+      <th>Series Title</th>
+      <th>Season Number</th>
+      <th>Episode Number</th>
+      <th>Episode Title</th>
+      <th>Character</th>
+      <th>Episode Summary</th>
+      <th colspan="7"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @appearances.each do |appearance| %>
+      <tr>
+        <td><%= appearance.guest_star.name %></td>
+        <td><%= appearance.series.series_title %></td>
+        <td><%= appearance.episode.season_number%></td>
+        <td><%= appearance.episode.episode_number%></td>
+        <td><%= appearance.episode.episode_title %></td>
+        <td><%= appearance.character %></td>
+        <td><%= raw appearance.episode.episode_summary.truncate(200) %></td>
+        <td><% link_to 'Show', appearance %></td>
+        <td><% link_to 'Edit', edit_appearance_path(appearance) %></td>
+        <td><% link_to 'Destroy', appearance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

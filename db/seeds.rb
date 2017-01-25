@@ -1,6 +1,6 @@
-series = ["Scrubs", "Once Upon a Time", "Law & Order", "House", "How I Met Your Mother"]
+series = ["Scrubs", "Party Down"]
 genres = MovieData.get_genre_list
-actors = [["Michael", "Weston"], ["Elizabeth", "Banks"], ["Ryan", "Reynolds"], ["Megan", "Mullally"], ["Martin", "Starr"]]
+actors = ["Michael Weston", "Elizabeth Banks", "Ryan Reynolds", "Megan Mullally", "Martin Starr"]
 
 #Add Series
 show_array = series.map do |show|
@@ -19,10 +19,9 @@ Series.create(show_array)
 #Add Episodes
 seasons_array = []
 series.each do |series|
-  puts series
-  binding.pry
   num_of_seasons = (MovieData.get_seasons(series))
   series_id = Series.find_by_series_title(series).id
+  #binding.pry
   num_of_seasons.times do |i|
     episodes = MovieData.get_episodes(series, i+1)
     episodes_array = episodes.map do |episode|
@@ -43,8 +42,36 @@ Episode.create(seasons_array.flatten)
 
 actors_array = actors.map do |actor|
   {
-    first_name: actor[0],
-    last_name: actor[1]
+    name: actor
   }
 end
-Actor.create(actors_array)
+GuestStar.create(actors_array)
+
+#Add Appearances
+appearances_array = []
+actors.each do |actor|
+  guest_star_id = GuestStar.find_by_name(actor).id
+  credits = MovieData.get_tv_credits(actor)
+  credit_ids = []
+  credits.each do |credit|
+    if series.include?(credit["name"])
+      credit_ids.push(credit["credit_id"])
+    end
+  end
+  credit_ids.each do |credit_id|
+    appearances = MovieData.get_appearances(credit_id)
+    series_id = Series.find_by_series_title(appearances["name"]).id
+    character = appearances["character"]
+    episodes = appearances["episodes"]
+    series_appearances_array = episodes.map do |episode|
+      {
+        guest_star_id: guest_star_id,
+        series_id: series_id,
+        character: character,
+        episode_id: Episode.find_episode(series_id, episode["name"])
+      }
+    end
+    appearances_array.push(series_appearances_array)
+  end
+end
+Appearance.create(appearances_array.flatten)

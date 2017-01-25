@@ -1,24 +1,25 @@
-<p>
-  <strong>Series Title:</strong>
-  <%= @series.series_title %>
-</p>
+<div class="container">
+  <div class="bottom-margin-30">
+    <div class="bottom-margin-15">
+      <h3><%= @series.series_title %></h3>
+      <i class="fa fa-arrow-left" aria-hidden="true"></i><%= link_to 'Back to Series', series_index_path %>
+    </div>
 
-<p>
-  <strong>Genre:</strong>
-  <%= @series.genre %>
-</p>
+  <div class="row">
+    <div class="col-xs-2">
+      <p><strong>Genre:</strong> <%= @series.genre %></p>
+    </div>
+    <div class="col-xs-2">
+      <p><strong>Rating:</strong><%= @series.rating %></p>
+    </div>
+  </div>
 
-<p>
-  <strong>Summary:</strong>
-  <%= @series.summary %>
-</p>
-
-<p>
-  <strong>Rating:</strong>
-  <%= @series.rating %>
-</p>
-
-<% link_to 'Edit |', edit_series_path(@series) %>
-<%= link_to 'Back', series_index_path %>
-
-<%= render partial: "shared/episodes", locals: {episodes: @episodes} %>
+  <p>
+    <strong>Summary:</strong>
+    <%= @series.summary %>
+  </p>
+  </div>
+  <div class="details">
+    <%= render partial: "shared/episodes", locals: {episodes: @episodes} %>
+  </div>
+</div>

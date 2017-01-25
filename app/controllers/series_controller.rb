@@ -11,7 +11,7 @@ class SeriesController < ApplicationController
   # GET /series/1.json
   def show
     @num_of_seasons = MovieData.get_seasons(@series.series_title)
-    @episodes = @series.episodes.sorted
+    @episodes = @series.episodes.season(1).sorted
   end
 
   def episodes_by_season
@@ -78,6 +78,6 @@ class SeriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def series_params
-      params.require(:series).permit(:series_name, :genre, :summary, :rating)
+      params.require(:series).permit(:series_title, :genre, :summary, :rating)
     end
 end

@@ -1,4 +1,4 @@
-<h3>Episodes</h3>
+<h4>Episodes</h4>
 
 <ul class="nav nav-pills">
   <li class="dropdown">
@@ -15,29 +15,23 @@
   </li>
 </ul>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Series Title</th>
-      <th>Episode Title</th>
-      <th>Season Number</th>
-      <th>Episode Number</th>
-      <th>Episode Summary</th>
-      <th colspan="5"></th>
+      <th class="std-col">Episode Title</th>
+      <th class="sml-col">Season</th>
+      <th class="sml-col">Episode</th>
+      <th class="long-col">Episode Summary</th>
     </tr>
   </thead>
 
   <tbody>
     <% @episodes.each do |episode| %>
       <tr>
-        <td><%= episode.series.series_title %></td>
-        <td><%= link_to episode.episode_title, episode %></td>
-        <td><%= episode.season_number %></td>
-        <td><%= episode.episode_number %></td>
-        <td><%= raw episode.episode_summary.truncate(200) %></td>
-        <td><% link_to 'Show', episode %></td>
-        <td><% link_to 'Edit', edit_episode_path(episode) %></td>
-        <td><% link_to 'Destroy', episode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="std-col"><%= link_to episode.episode_title, episode %></td>
+        <td class="sml-col"><%= episode.season_number %></td>
+        <td class="sml-col"><%= episode.episode_number %></td>
+        <td class="long-col"><%= raw episode.episode_summary.truncate(200) %></td>
       </tr>
     <% end %>
   </tbody>

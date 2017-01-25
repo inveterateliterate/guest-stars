@@ -10,6 +10,16 @@ class GuestStarsController < ApplicationController
   # GET /guest_stars/1
   # GET /guest_stars/1.json
   def show
+    @appearances = Appearance.by_guest_star(@guest_star.name)
+    @series = @appearances.all_series
+  end
+
+  def appearances_by_series
+    @guest_star = GuestStar.find_by_name(params[:name]) || GuestStar.find(params[:id])
+    @appearances = Appearance.by_guest_star(@guest_star.name)
+    @series = @appearances.all_series
+    @appearances = @appearances.by_series(params[:series_title])
+    render :show
   end
 
   # GET /guest_stars/new
@@ -64,11 +74,11 @@ class GuestStarsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_guest_star
-      @guest_star = GuestStar.find(params[:id])
+      @guest_star = GuestStar.find_by_name(params[:id]) || GuestStar.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def guest_star_params
-      params.require(:guest_star).permit(:first_name, :last_name, :image)
+      params.require(:guest_star).permit(:name, :image)
     end
 end

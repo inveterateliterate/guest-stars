@@ -12,6 +12,7 @@ module MovieData
 
   def self.get_id(search_type, query_term)
     search_for(search_type, series_title)["id"]
+  end
 
   #Genres
   def self.get_genre_list
@@ -45,16 +46,12 @@ module MovieData
   #   HTTParty.get(BASE_URL + "person/#{star_imdb_id}?" + API_KEY)
   # end
 
-  def self.get_appearances(query_term)
-    star_imdb_id = search_for("person", query_term)["id"]
-    HTTParty.get(BASE_URL + "person/#{star_imdb_id}/tv_credits?" + API_KEY)
+  def self.get_tv_credits(guest_star)
+    star_imdb_id = search_for("person", guest_star)["id"]
+    HTTParty.get(BASE_URL + "person/#{star_imdb_id}/tv_credits?" + API_KEY)["cast"]
+  end
+
+  def self.get_appearances(credit_id)
+    HTTParty.get(BASE_URL + "credit/#{credit_id}?" + API_KEY)["media"]
   end
 end
-
-#Examples of using the API
-  #https://api.themoviedb.org/3/movie/76341?api_key={api_key}
-  #https://api.themoviedb.org/3/tv/1408/season/1/episode/1?api_key=#{my_api_key}")["guest_stars"]
-  # https://api.themoviedb.org/3/search/movie?api_key={my_api_key}&query=Jack+Reacher
-  # https://api.themoviedb.org/3/tv/3?api_key=my_api_key&language=en-US
-
-

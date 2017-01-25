@@ -1,19 +1,11 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="bottom-margin-30">
+    <div class="bottom-margin-15">
+      <h3><%= @guest_star.name %></h3>
+      <i class="fa fa-arrow-left" aria-hidden="true"></i><%= link_to 'Back to Guest Stars', guest_stars_path %>
+    </div>
 
-<p>
-  <strong>First name:</strong>
-  <%= @guest_star.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @guest_star.last_name %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @guest_star.image %>
-</p>
-
-<%= link_to 'Edit', edit_guest_star_path(@guest_star) %> |
-<%= link_to 'Back', guest_stars_path %>
+    <div class="details">
+      <%= render partial: "shared/appearances", locals: {appearances: @appearances} %>
+    </div>
+  </div>

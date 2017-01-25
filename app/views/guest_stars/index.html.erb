@@ -1,31 +1,25 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="bottom-margin-30">
+    <h1>Guest Stars</h1>
+  </div>
 
-<h1>Guest Stars</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="std-col borderless"></th>
+          <th class="std-col borderless"></th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Image</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <tbody>
+        <% @guest_stars.each do |guest_star| %>
+          <tr>
+            <td class="std-col borderless"><%= link_to guest_star.name, guest_star_path(guest_star.name) %></td>
+            <td class="std-col borderless"><img src="https://image.tmdb.org/t/p/w300/opY5b6qQOCIFDpQXYsxFbQ7Ka6h.jpg"></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-  <tbody>
-    <% @guest_stars.each do |guest_star| %>
-      <tr>
-        <td><%= guest_star.first_name %></td>
-        <td><%= guest_star.last_name %></td>
-        <td><%= guest_star.image %></td>
-        <td><%= link_to 'Show', guest_star %></td>
-        <td><%= link_to 'Edit', edit_guest_star_path(guest_star) %></td>
-        <td><%= link_to 'Destroy', guest_star, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Guest Star', new_guest_star_path %>
+    <br>
+</div>
