@@ -3,24 +3,29 @@
     <h1>Guest Stars</h1>
   </div>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th class="std-col borderless"></th>
-        </tr>
-      </thead>
 
-      <tbody>
-        <% @guest_stars.each do |guest_star| %>
-          <tr>
-            <td class="std-col borderless">
-              <img class="sml-profile" src="<%= "https://image.tmdb.org/t/p/w92#{guest_star.image}" %>">
-              <p><%= link_to guest_star.name, guest_star_path(guest_star.name) %></p>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="pins">
+  <% @guest_stars.each_slice(3) do |row| %>
+    <div class="row">
+      <% row.each do |guest_star| %>
+        <div class="pin-container col-md-4">
+          <div class="pin">
+            <div class="pin-header row">
 
-    <br>
+              <div class="col-xs-6">
+                <img class="sml-profile" src="<%= "https://image.tmdb.org/t/p/w92#{guest_star.image}" %>">
+                <p><%= link_to "#{guest_star.name}", guest_star_path(guest_star.name) %></p>
+              </div>
+
+              <div class="col-xs-6">
+
+              </div>
+
+            </div>
+            <hr/>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  <%end%>
 </div>

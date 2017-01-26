@@ -8,4 +8,11 @@ class Appearance < ApplicationRecord
   scope :all_series, -> { Series.find(distinct.pluck(:series_id)) }
   scope :all_guest_stars, -> { GuestStar.find(distinct.pluck(:guest_star_id)) }
 
+  def self.add_character(guest_star, series, character)
+    appearances = Appearance.by_guest_star(guest_star).by_series(series)
+    appearances.each do |appearance|
+      appearance.update(character: character)
+    end
+  end
+
 end

@@ -6,7 +6,7 @@ class SearchController < ApplicationController
     elsif Search.query(params[:query]) === 'guest star'
       redirect_to guest_star_path(params[:query])
     else
-      redirect_to :back, :alert => "That search term cannot be found. Please try again."
+      redirect_to :back, :alert => "That search term can't be found. Please try again."
     end
   end
 
