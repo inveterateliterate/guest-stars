@@ -1,8 +1,27 @@
 <div class="container">
   <div class="bottom-margin-30">
-    <div class="bottom-margin-15">
-      <h3><%= @guest_star.name %></h3>
-      <i class="fa fa-arrow-left" aria-hidden="true"></i><%= link_to 'Back to Guest Stars', guest_stars_path %>
+
+     <div class="row">
+      <div class="col-sm-6">
+        <div class="bottom-margin-15">
+          <h3><%= @guest_star.name %></h3>
+        <div class="bottom-margin-15">
+          <img src="<%= "https://image.tmdb.org/t/p/w185#{@guest_star.image}" %>">
+        </div>
+          <i class="fa fa-arrow-left" aria-hidden="true"></i><%= link_to 'Back to Guest Stars', guest_stars_path %>
+        </div>
+      </div>
+      <div class="col-sm-3 offset-sm-3">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= "Other Guest Stars in #{@series_title}" %></h3>
+          </div>
+          <div class="panel-body">
+          <%= console %>
+            <%= render partial: "shared/guest_stars", locals: {guest_stars: @other_stars} %>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="details">

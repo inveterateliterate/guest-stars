@@ -46,6 +46,12 @@ module MovieData
   #   HTTParty.get(BASE_URL + "person/#{star_imdb_id}?" + API_KEY)
   # end
 
+  def self.get_image_pathname(guest_star)
+    # 92
+    # 185
+    search_for("person", guest_star)["profile_path"]
+  end
+
   def self.get_tv_credits(guest_star)
     star_imdb_id = search_for("person", guest_star)["id"]
     HTTParty.get(BASE_URL + "person/#{star_imdb_id}/tv_credits?" + API_KEY)["cast"]

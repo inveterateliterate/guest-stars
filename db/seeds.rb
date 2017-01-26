@@ -1,6 +1,7 @@
-series = ["Scrubs", "Party Down"]
+# series = ["How I Met Your Mother"]
 genres = MovieData.get_genre_list
-actors = ["Michael Weston", "Elizabeth Banks", "Ryan Reynolds", "Megan Mullally", "Martin Starr"]
+actors = ["Julia Roberts"]
+# actors = ["Michael Weston", "Elizabeth Banks", "Ryan Reynolds", "Megan Mullally", "Martin Starr"]
 
 #Add Series
 show_array = series.map do |show|
@@ -21,7 +22,6 @@ seasons_array = []
 series.each do |series|
   num_of_seasons = (MovieData.get_seasons(series))
   series_id = Series.find_by_series_title(series).id
-  #binding.pry
   num_of_seasons.times do |i|
     episodes = MovieData.get_episodes(series, i+1)
     episodes_array = episodes.map do |episode|
@@ -42,7 +42,8 @@ Episode.create(seasons_array.flatten)
 
 actors_array = actors.map do |actor|
   {
-    name: actor
+    name: actor,
+    image: MovieData.get_image_pathname(actor)
   }
 end
 GuestStar.create(actors_array)

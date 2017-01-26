@@ -9,7 +9,6 @@
         <th class="std-col">Title</th>
         <th class="std-col">Genre</th>
         <th class="long-col">Summary</th>
-        <th class="sml-col">Rating</th>
       </tr>
     </thead>
 
@@ -19,7 +18,6 @@
           <td class="std-col"><%= link_to series.series_title, series_path(series.series_title) %></td>
           <td class="std-col"><%= series.genre %></td>
           <td class="long-col"><%= raw series.summary.truncate(200) %></td>
-          <td class="sml-col"><%= series.rating %></td>
         </tr>
       <% end %>
     </tbody>

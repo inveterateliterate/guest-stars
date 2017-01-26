@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
+
   devise_for :users
 
-  #get '/series/:series_title' => 'series#series_by_title', as: "series_by_title"
-  get '/series/:series_title/season/:season_num' => 'series#episodes_by_season', as: 'episodes_by_season'
-  get '/guest_stars/:name/appearances/:series_title' => 'guest_stars#appearances_by_series', as: 'appearances_by_series'
+  # resources :appearances
+  get '/search' => 'search#query', as: 'search'
 
-  resources :appearances
   resources :episodes
+
+  get '/guest_stars/:name' => 'guest_stars#show', as: 'guest_star'
   resources :guest_stars
-  resources :series
+  root 'series#index'
+  get '/series/:series_title' => 'series#show', as: 'series'
+  resources :series, except: [:show]
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

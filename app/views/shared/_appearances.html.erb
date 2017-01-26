@@ -9,7 +9,7 @@
         <li><%= link_to "All", guest_star_path(@guest_star.name) %></li>
         <li role="presentation" class="divider"></li>
         <% @series.each do |series| %>
-        <li><%= link_to series.series_title, appearances_by_series_path(name: @guest_star.name, series_title: series.series_title) %></li>
+        <li><%= link_to series.series_title, guest_star_path(series_title: series.series_title) %></li>
         <%end%>
       </ul>
   </li>
@@ -30,7 +30,7 @@
   <tbody>
     <% @appearances.each do |appearance| %>
       <tr>
-        <td class="std-col"><%= appearance.series.series_title %></td>
+        <td class="std-col"><%= link_to appearance.series.series_title, series_path(appearance.series.series_title) %></td>
         <td class="sml-col"><%= appearance.episode.season_number%></td>
         <td class="sml-col"><%= appearance.episode.episode_number%></td>
         <td class="std-col"><%= appearance.episode.episode_title %></td>

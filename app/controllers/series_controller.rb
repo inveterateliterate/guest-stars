@@ -1,5 +1,5 @@
 class SeriesController < ApplicationController
-  before_action :set_series, only: [:show, :edit, :update, :destroy]
+  # before_action :set_series, only: [:edit, :update, :destroy]
 
   # GET /series
   # GET /series.json
@@ -10,15 +10,11 @@ class SeriesController < ApplicationController
   # GET /series/1
   # GET /series/1.json
   def show
+    @series = Series.find_by_series_title(params[:series_title])
     @num_of_seasons = MovieData.get_seasons(@series.series_title)
-    @episodes = @series.episodes.season(1).sorted
-  end
-
-  def episodes_by_season
-    @series = Series.find_by_series_title(params[:series_title]) || Series.find(params[:id])
-    @num_of_seasons = MovieData.get_seasons(@series.series_title)
-    @episodes = @series.episodes.season(params[:season_num]).sorted
-    render :show
+    season_num = params[:season] || 1
+    @episodes = @series.episodes.season(season_num).sorted
+    @guest_stars = Appearance.by_series(@series.series_title).all_guest_stars
   end
 
   # GET /series/new
@@ -28,6 +24,7 @@ class SeriesController < ApplicationController
 
   # GET /series/1/edit
   def edit
+    @series = Series.find_by_series_title(params[:series_title])
   end
 
   # POST /series
@@ -73,7 +70,7 @@ class SeriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_series
-      @series = Series.find_by_series_title(params[:id]) || Series.find(params[:id])
+      @series = Series.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

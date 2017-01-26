@@ -1,0 +1,12 @@
+<div class="container">
+
+
+      <ul class="list">
+        <% guest_stars.each do |guest_star| %>
+             <li>
+              <p><%= link_to guest_star.name, guest_star_path(guest_star.name) %></p>
+            </li>
+        <% end %>
+      </ul>
+
+</div>

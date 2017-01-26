@@ -7,15 +7,16 @@
       <thead>
         <tr>
           <th class="std-col borderless"></th>
-          <th class="std-col borderless"></th>
         </tr>
       </thead>
 
       <tbody>
         <% @guest_stars.each do |guest_star| %>
           <tr>
-            <td class="std-col borderless"><%= link_to guest_star.name, guest_star_path(guest_star.name) %></td>
-            <td class="std-col borderless"><img src="https://image.tmdb.org/t/p/w300/opY5b6qQOCIFDpQXYsxFbQ7Ka6h.jpg"></td>
+            <td class="std-col borderless">
+              <img class="sml-profile" src="<%= "https://image.tmdb.org/t/p/w92#{guest_star.image}" %>">
+              <p><%= link_to guest_star.name, guest_star_path(guest_star.name) %></p>
+            </td>
           </tr>
         <% end %>
       </tbody>

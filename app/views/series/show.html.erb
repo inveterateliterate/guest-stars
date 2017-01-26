@@ -1,23 +1,42 @@
 <div class="container">
-  <div class="bottom-margin-30">
+  <div class="bottom-margin-15">
     <div class="bottom-margin-15">
       <h3><%= @series.series_title %></h3>
       <i class="fa fa-arrow-left" aria-hidden="true"></i><%= link_to 'Back to Series', series_index_path %>
     </div>
 
-  <div class="row">
-    <div class="col-xs-2">
-      <p><strong>Genre:</strong> <%= @series.genre %></p>
-    </div>
-    <div class="col-xs-2">
-      <p><strong>Rating:</strong><%= @series.rating %></p>
-    </div>
-  </div>
 
-  <p>
-    <strong>Summary:</strong>
-    <%= @series.summary %>
-  </p>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Series Info</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-2">
+                <p><strong>Genre: </strong> <%= @series.genre %></p>
+              </div>
+              <div clas="col-xs-4">
+                <p><strong>Summary: </strong><%= @series.summary %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Guest Stars</h3>
+          </div>
+          <div class="panel-body">
+            <%= render partial: "shared/guest_stars", locals: {guest_stars: @guest_stars} %>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="details">
     <%= render partial: "shared/episodes", locals: {episodes: @episodes} %>

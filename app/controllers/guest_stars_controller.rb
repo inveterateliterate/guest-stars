@@ -1,25 +1,24 @@
 class GuestStarsController < ApplicationController
-  before_action :set_guest_star, only: [:show, :edit, :update, :destroy]
+  before_action :set_guest_star, only: [:edit, :update, :destroy]
 
   # GET /guest_stars
   # GET /guest_stars.json
   def index
-    @guest_stars = GuestStar.all
+    @guest_stars = GuestStar.all.sort_by { |star| star.name }
   end
 
   # GET /guest_stars/1
   # GET /guest_stars/1.json
   def show
-    @appearances = Appearance.by_guest_star(@guest_star.name)
-    @series = @appearances.all_series
-  end
-
-  def appearances_by_series
-    @guest_star = GuestStar.find_by_name(params[:name]) || GuestStar.find(params[:id])
-    @appearances = Appearance.by_guest_star(@guest_star.name)
-    @series = @appearances.all_series
-    @appearances = @appearances.by_series(params[:series_title])
-    render :show
+    @guest_star = GuestStar.find_by_name(params[:name])
+    @series = Appearance.by_guest_star(@guest_star.name).all_series.sort_by { |series| series.series_title }
+    @series_title = params[:series_title] || @series.first.series_title
+    @appearances = Appearance.by_guest_star(@guest_star.name).by_series(@series_title)
+    @other_guest_stars = Appearance.by_series(@series_title).all_guest_stars
+    @other_stars = @other_guest_stars.map  do |star|
+        star if star['name'] != @guest_star.name
+      end
+    @other_stars.delete(nil)
   end
 
   # GET /guest_stars/new
@@ -74,7 +73,7 @@ class GuestStarsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_guest_star
-      @guest_star = GuestStar.find_by_name(params[:id]) || GuestStar.find(params[:id])
+      @guest_star = GuestStar.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
