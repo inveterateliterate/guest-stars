@@ -1,12 +1,12 @@
 <div class="container">
-
-
-      <ul class="list">
         <% guest_stars.each do |guest_star| %>
-             <li>
+          <div class="row">
+            <div class="col-xs-1">
+              <img class="sml-profile" src="<%= "https://image.tmdb.org/t/p/w92#{guest_star.image}" %>" height="60px" width="50px">
+            </div>
+            <div class="col-xs-1">
               <p><%= link_to guest_star.name, guest_star_path(guest_star.name) %></p>
-            </li>
+            </div>
+          </div>
         <% end %>
-      </ul>
-
 </div>

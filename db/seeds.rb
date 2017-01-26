@@ -4,16 +4,16 @@ actors = ['John Ritter']
 # actors = ["Michael Weston", "Elizabeth Banks", "Ryan Reynolds", "Megan Mullally", "Martin Starr"]
 
 #Add Series
-# show_array = series.map do |show|
-#   data = MovieData.search_for("tv", show)
-#   genre_id = data["genre_ids"][0]
-#   genre = MovieData.get_genre(genres, genre_id)
-#   {
-#     series_title: data["name"],
-#     genre: genre,
-#     summary: data["overview"]
-#   }
-# end
+show_array = series.map do |show|
+  data = MovieData.search_for("tv", show)
+  genre_id = data["genre_ids"][0]
+  genre = MovieData.get_genre(genres, genre_id)
+  {
+    series_title: data["name"],
+    genre: genre,
+    summary: data["overview"]
+  }
+end
 
 # Series.create(show_array)
 
