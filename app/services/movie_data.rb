@@ -2,7 +2,6 @@ require 'httparty'
 require 'uri'
 
 module MovieData
-    # @@api_key = ENV['TMDB_API_KEY']
     BASE_URL = "https://api.themoviedb.org/3/"
     API_KEY = "api_key=#{ENV['TMDB_API_KEY']}"
 
